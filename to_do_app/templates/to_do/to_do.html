@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+	<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+	<!-- <link rel="stylesheet" href="{% static 'Bootstrap/css/flatly.min.css'  %}" /> -->
+	<link rel="stylesheet" href="{% static 'css/styles_to_do_app.css' %}" />
+{% endblock %}
+
+{% block content %}
+				<div class="col-lg-4 col-lg-offset-4 container text-center" id="content">
+					<h2>APA YANG INGIN ANDA LAKUKAN ?</h2>
+
+					<form action="{% url 'tambahToDo' %}" method="POST" role="form">
+						{% csrf_token %}
+						<div class="form-group">
+							<div class="input-group">
+								{{toDoForm.text}}
+							  <span class="input-group-btn">
+								  <button type="submit" class="btn btn-default" id="add-btn">TAMBAH</button>
+							  </span>
+							</div>
+						</div>
+					</form>
+
+					<div class="row t10">
+						<div class="col-lg-12">
+							<div class="btn-toolbar">
+								<div class="btn-group">
+									<a href="{% url 'deleteComplete' %}">
+										<button type="button" class="btn btn-warning">
+											<i class="glyphicon glyphicon-trash"></i> HAPUS YANG SUDAH SELESAI
+										</button>
+									</a>
+								</div>
+								<div class="btn-group">
+									<a href="{% url 'deleteAll' %}">
+										<button type="button" class="btn btn-warning" style="margin-left:8px">
+											<i class="glyphicon glyphicon-trash"></i> HAPUS SEMUA
+										</button>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<ul class="list-group t20">
+						{% for toDo in toDoList %}
+							{% if toDo.complete %}
+								<li class="list-group-item todo-completed">{{toDo.text}}</li>
+							{% else %}
+								<a href="{% url 'completeToDo' toDo.id %}"><li class="list-group-item">{{toDo.text}}</li></a>
+							{% endif %}
+						{% endfor %}
+					</ul>
+				</div>
+{%endblock%}

@@ -1,7 +1,7 @@
-"""my_project URL Configuration
+"""project_saya URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/2.1/topics/http/urls/
+    https://docs.djangoproject.com/en/2.0/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -13,20 +13,13 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
 from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', views.home, name='home'),
-    path('Contact_me/', views.Contact_me, name='Contact_me'),
-    path('my_project/', views.my_project, name='my_project'),
-    path('accounts/', include('accounts.urls')),
-
-    path('my_project/to_do_app/', include('to_do_app.urls')),
-
-    # path('budget_app/', include('budget_app/urls')),
-    # path('calendar_app/', include('calendar_app/urls')),
-    # path('weather_app/', include('weather_app/urls')),
+    path('', views.toDo, name='to_do_app'),
+    path('tambah/', views.tambahToDo, name='tambahToDo'),
+    path('complete/<toDoID>', views.completeToDo, name='completeToDo'),
+    path('delete_complete/', views.deleteComplete, name='deleteComplete'),
+    path('delete_all/', views.deleteAll, name='deleteAll'),
 ]
