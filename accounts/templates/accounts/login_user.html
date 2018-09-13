@@ -25,7 +25,10 @@
           {{form.password}}
           {{akun_salah}}
           <button class="btn btn-primary btn-block btn-lg btn-signin" type="submit">Sign in</button>
-        </form><a href="{% url 'register_user' %}" class="forgot-password">Belum Punya Akun ?, Klik disini</a></div>
+        </form>
+        <p style="color:red">*beberapa fitur/app mengharuskan anda login untuk bisa dijalankan</p>
+        <h5><a href="{% url 'register_user' %}" class="forgot-password">Belum Punya Akun ?, Klik disini</a></h5>
+      </div>
     <script src="{% static '/js/jquery.min.js'%} "></script>
     <script src="{% static '/bootstrap/js/bootstrap.min.js'%} "></script>
 </body>

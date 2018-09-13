@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<br>
+<div class="container">
+  <h1 style="text-align:center">Selamat Datang di polling_app</h1>
+</div>
+<br>
+<div class="list-group">
+  <div class="row justify-content-md-center">
+    <div class="col-6">
+      <a href="{% url 'polling_tambah' %}" class="btn btn-primary">Tambah Polling</a>
+      <br>
+      {% for poll in poll %}
+        <a href="{% url 'polling_detail' poll.id %}" class="list-group-item list-group-item-action list-group-item-dark">{{poll}}</a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}
