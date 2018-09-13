@@ -12,9 +12,8 @@ def polling_list(request):
 @login_required
 def polling_tambah(request):
     if request.method == "POST":
-        pass
-        # form = PollingTambahForm(request.POST)
-        # if form.is_valid():
+        form = PollingTambahForm(request.POST)
+        if form.is_valid():
     else:
         form = PollingTambahForm()
     return render(request, 'polling_app/polling_tambah.html', {'form':form})
