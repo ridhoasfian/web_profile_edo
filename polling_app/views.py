@@ -6,7 +6,7 @@ from .models import *
 
 # Create your views here.
 def polling_list(request):
-    
+    poll = Poll.objects.all()
     return render(request, 'polling_app/polling_list.html', {})
 
 @login_required
