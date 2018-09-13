@@ -9,3 +9,6 @@ def Contact_me(request):
 
 def my_project(request):
     return render(request, 'my_project.html', {})
+
+def test(request):
+    return render(request, 'test.html', {})

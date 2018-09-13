@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="{% static 'js/jquery.js' %}" ></script>
+  </head>
+  <body>
+    <h1 id="test">test</h1>
+
+
+    <script>
+    $(document).ready(function(){
+      $("#test").css("color":"blue");
+    });
+    </script>
+  </body>
+</html>

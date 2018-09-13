@@ -25,6 +25,9 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
 
     path('my_project/to_do_app/', include('to_do_app.urls')),
+    path('my_project/budget_app/', include('budget_app.urls')),
+
+    path('test/', views.test, name='test'),
 
     # path('budget_app/', include('budget_app/urls')),
     # path('calendar_app/', include('calendar_app/urls')),

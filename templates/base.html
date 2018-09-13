@@ -11,6 +11,12 @@
 
     {% block css %}
     {% endblock %}
+
+    {% block jquery %}
+    {% endblock %}
+
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/all.js' %}"></script>
   </head>
   <body>
     <div class="container">
@@ -27,6 +33,14 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'my_project' %}">My Project</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="dropdown_artikel">Artikel</a>
+              <div id="submenu">
+                <a href="#">Teknologi</a> <br>
+                <a href="#">Movie</a> <br>
+                <a href="#">Hobi</a> <br>
+              </div>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">About</a>
@@ -53,5 +67,13 @@
       </div>
     </footer>
 
+
+  <script>
+  $('#submenu').hide();
+
+    $('#dropdown_artikel').click(function(){
+      $('#submenu').slideToggle(500);
+    });
+  </script>
   </body>
 </html>

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+          <div class="card-body">
+            <h5>Total Anggaran</h5>
+            <h3>Rp.{{anggaran.budget}}</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+          <div class="card-body">
+            <h5>Sisa Anggaran</h5>
+            {% if anggaran.budget_sisa < 0 %}
+              <h3 style="color:red">Rp.{{anggaran.budget_sisa}}</h3>
+            {% else  %}
+              <h3 style="color:green">Rp.{{anggaran.budget_sisa}}</h3>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+          <div class="card-body">
+            <h5>Transaksi</h5>
+            <h3>{{anggaran.jumlah_transaksi}}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br><br>
+    <form action="" method="post">
+      <a href="{% url 'submit_biaya' anggaran.id %}" class="btn btn-success" type="submit" name="button">Submit Biaya</a>
+    </form>
+
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">ID Biaya</th>
+        <th scope="col">Title</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Kategori</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for biaya_list in biaya_list %}
+      <tr>
+        <th scope="row">{{biaya_list.id}}</th>
+        <td>{{biaya_list.nama}}</td>
+        <td>{{biaya_list.amount}}</td>
+        <td>{{biaya_list.kategori.nama}}</td>
+        <td><a href="{% url 'biaya_hapus' anggaran.id biaya_list.id %}"><i class="fas fa-times-circle"></i></a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

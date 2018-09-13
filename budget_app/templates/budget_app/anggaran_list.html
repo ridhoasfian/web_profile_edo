@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<br><br>
+<div class="conatiner">
+  {% if anggaran_kosong %}
+    <main role="main">
+    <div class="jumbotron">
+      <div class="col-sm-8 mx-auto">
+        <h2 style="text-align:center">Belum Ada Anggaran</h2>
+        <p style="text-align:center">Anda belum mempunyai data anggaran</p>
+        <p style="text-align:center">
+          <a href="{% url 'tambah_anggaran' %}" class="btn btn-success" >Tambah Anggaran</a> <br> <br>
+        </p>
+      </div>
+    </div>
+    </main>
+    {% else %}
+    <div class="list-group">
+      <div class="row justify-content-md-center">
+        <div class="col-6">
+          <a href="{% url 'tambah_anggaran' %}" class="btn btn-success">Tambah Anggaran</a> <br> <br>
+          {% for anggaran in anggaran_list %}
+          <div class="list-group-item list-group-item-action list-group-item-warning">
+            <a href="{% url 'anggaran_detail' anggaran.id %}" >{{anggaran.nama}}<a href="{% url 'anggaran_hapus' anggaran.id %}"><i class="fas fa-times-circle"></i></a></a>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

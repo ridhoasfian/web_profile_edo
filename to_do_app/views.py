@@ -5,7 +5,7 @@ from .forms import ToDoForm
 from django.views.decorators.http import require_POST
 
 # Create your views here.
-def toDo(request):
+def to_do_app(request):
     toDoForm = ToDoForm()
     toDoList = ToDo.objects.order_by('id')
     return render(request, 'to_do/to_do.html', {'toDoList':toDoList, 'toDoForm':toDoForm} )
@@ -18,7 +18,7 @@ def tambahToDo(request):
         newToDo = ToDo(text=form.cleaned_data['text'])
         newToDo.save()
 
-    return redirect('toDo')
+    return redirect('to_do_app')
 
 
 def completeToDo(request, toDoID):
@@ -26,19 +26,19 @@ def completeToDo(request, toDoID):
     toDo.complete = True
     toDo.save()
 
-    return redirect('toDo')
+    return redirect('to_do_app')
 
 
 def deleteComplete(request):
     ToDo.objects.filter(complete__exact=True).delete()
 
-    return redirect('toDo')
+    return redirect('to_do_app')
 
 
 def deleteAll(request):
     ToDo.objects.all().delete()
 
-    return redirect('toDo')
+    return redirect('to_do_app')
 
 
 

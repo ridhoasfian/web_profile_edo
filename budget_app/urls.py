@@ -1,4 +1,4 @@
-"""to_do_app URL Configuration
+"""budget_app URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.1/topics/http/urls/
@@ -17,5 +17,10 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.to_do_index, name='to_do_index'),
+    path('tambah_anggaran/', views.tambah_anggaran, name='tambah_anggaran'),
+    path('anggaran_list/', views.anggaran_list, name='anggaran_list'),
+    path('anggaran_detail/<int:id_anggaran>', views.anggaran_detail, name='anggaran_detail'),
+    path('anggaran_edit/<int:id_anggaran>/submit_biaya', views.submit_biaya, name='submit_biaya'),
+    path('anggaran_hapus/<int:id_anggaran>', views.anggaran_hapus, name='anggaran_hapus'),
+    path('anggaran_hapus/<int:id_anggaran>/biaya_hapus/<int:id_biaya>', views.biaya_hapus, name='biaya_hapus'),
 ]

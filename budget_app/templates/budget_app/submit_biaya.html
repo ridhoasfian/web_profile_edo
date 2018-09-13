@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col-md-6">
+      <h1>Submit Transaksi</h1>
+      <form action="" method="POST">
+        {%csrf_token%}
+        {{form.keperluan}}
+        {{form.amount}}
+        {{form.kategori}}
+
+        <button type="submit" name="button" class="btn btn-success" style="margin:5px">Simpan</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

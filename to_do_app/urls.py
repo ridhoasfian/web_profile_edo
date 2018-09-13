@@ -17,7 +17,7 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path('', views.toDo, name='to_do_app'),
+    path('', views.to_do_app, name='to_do_app'),
     path('tambah/', views.tambahToDo, name='tambahToDo'),
     path('complete/<toDoID>', views.completeToDo, name='completeToDo'),
     path('delete_complete/', views.deleteComplete, name='deleteComplete'),
