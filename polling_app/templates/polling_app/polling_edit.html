@@ -4,17 +4,39 @@
 {% block content %}
 <br>
 <div class="container">
-  <h1 style="text-align:center">Edit Polling Anda</h1>
+  <h2 style="text-align:center">Edit Polling Anda</h2>
 </div>
 <div class="row justify-content-md-center">
   <div class="col-6">
-    <form action="" method="POST">
+    <form method="POST">
+      {% for pesan in messages %}
+        <div {% if pesan.tags %} class="{{pesan.tags}}" {% endif %} role="alert" id="pesan">
+          <strong>{{pesan}}!</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close" id="close_pesan">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      {% endfor %}
       {% csrf_token %}
       Text :
       {{form.text}}
       <button type="submit" name="button" class="btn btn-primary">Simpan Perubahan Anda</button>
       <a href="{% url 'choice_tambah' poll.id %}" name="button" class="btn btn-warning">Tambah Choice pada Polling</a>
     </form>
+    <br>
+    <h3 style="text-align:center">Choices</h3>
+      {% for choice in poll.choice_set.all %}
+      <a href="{% url 'choice_edit' choice.id %}" class="float-left" style="margin-right:8px"><i class="far fa-edit" style="margin-right:8px"></i>{{choice.text}}</a><br>
+      {% endfor %}
   </div>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#close_pesan').click(function(){
+      $('#pesan').remove();
+    });
+
+  });
+</script>
 {% endblock %}

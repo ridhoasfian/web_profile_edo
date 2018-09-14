@@ -103,6 +103,30 @@ def poll_vote(request, id_polling):
     return redirect('polling_detail', id_polling)
 
 
+def choice_edit(request, id_choice):
+    choice = get_object_or_404(Choice, pk=id_choice)
+    poll = get_object_or_404(Poll, pk=choice.poll.id)
+    if request.user != poll.owner:
+        return redirect('polling_list')
+    if request.method == "POST":
+        form = ChoiceEditForm(request.POST, instance=choice)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'berhasil merubah choice pada polling ini !', extra_tags='alert alert-success alert-dismissible fade show')
+            return redirect('polling_edit', choice.poll.id)
+    else:
+        form = ChoiceEditForm(instance=choice)
+    return render(request, 'polling_app/choice_edit.html', {'form':form, 'choice':choice, 'poll':poll})
+
+
+def choice_delete(request, id_polling, id_choice):
+    choice = get_object_or_404(Choice, pk=id_choice)
+    choice.delete()
+    messages.success(request, 'berhasil menghapus choice !', extra_tags='alert alert-success alert-dismissible fade show')
+    return redirect('polling_edit', id_polling)
+
+
+
 
 
 

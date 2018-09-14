@@ -21,3 +21,11 @@ class ChoiceTambahForm(forms.ModelForm):
         widgets = {
             'text':forms.TextInput(attrs={'class':'form-control', 'placeholder':'choice text'}),
         }
+
+class ChoiceEditForm(forms.ModelForm):
+    class Meta:
+        model = Choice
+        fields = ['text']
+        widgets = {
+            'text':forms.TextInput(attrs={'class':'form-control'})
+        }

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<br>
+<div class="container">
+  <h1 style="text-align:center">Edit Choice pada Polling</h1>
+</div>
+<div class="row justify-content-md-center">
+  <div class="col-6">
+    <form method="post" >
+      {% csrf_token %}
+      choice text :
+      {{form.text}}
+      <button style="margin-top:5px" type="submit" name="button" class="btn btn-success">Edit Choice</button>
+      <a href="{% url 'choice_delete' poll.id choice.id %}"><button style="margin-top:5px" type="button" name="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i>Delete</button></a>
+    </form>
+  </div>
+</div>
+{% endblock %}
