@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.contrib import messages
 from .forms import *
 from .models import *
 import datetime
@@ -32,7 +33,55 @@ def polling_tambah(request):
         form = PollingTambahForm()
     return render(request, 'polling_app/polling_tambah.html', {'form':form})
 
+
 @login_required
 def polling_detail(request, id_polling):
     poll = get_object_or_404(Poll, pk=id_polling)
     return render(request, 'polling_app/polling_detail.html', {'poll':poll})
+
+
+@login_required
+def polling_hapus(request, id_polling):
+    get_object_or_404(Poll, pk=id_polling).delete()
+    messages.success(request, 'berhasil menghapus polling !', extra_tags='alert alert-danger alert-dismissible fade show')
+    return redirect('polling_list')
+
+
+@login_required
+def polling_edit(request, id_polling):
+    poll = get_object_or_404(Poll, pk=id_polling)
+    if poll.owner != request.user:
+        return redirect('polling_list')
+    if request.method == "POST":
+        pass
+        form = PollingEditForm(request.POST, instance=poll)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'berhasil merubah polling !', extra_tags='alert alert-success alert-dismissible fade show')
+            return redirect('polling_list')
+    else:
+        form = PollingEditForm(instance=poll)
+
+    return render(request, 'polling_app/polling_edit.html', {'poll':poll,'form':form})
+
+
+@login_required
+def choice_tambah(request, id_polling):
+    poll = get_object_or_404(Poll, pk=id_polling)
+    if poll.owner != request.user:
+        return redirect('polling_list')
+    if request.method == "POST":
+        pass
+        # form = ChoiceTambahForm(request.POST)
+        # if form.is_valid():
+        #
+    else:
+        form = ChoiceTambahForm()
+    return render(request, 'polling_app/choice_tambah.html', {'form':form, 'poll':poll})
+
+
+
+
+
+
+#

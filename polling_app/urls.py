@@ -19,5 +19,8 @@ from . import views
 urlpatterns = [
     path('polling_list/', views.polling_list, name='polling_list'),
     path('polling_tambah/', views.polling_tambah, name='polling_tambah'),
-    path('polling_detail/<int:id_polling>', views.polling_detail, name='polling_detail'),
+    path('polling_detail/<int:id_polling>/', views.polling_detail, name='polling_detail'),
+    path('polling_hapus/<int:id_polling>/', views.polling_hapus, name='polling_hapus'),
+    path('polling_edit/<int:id_polling>/', views.polling_edit, name='polling_edit'),
+    path('polling_edit/<int:id_polling>/choice_tambah/', views.choice_tambah, name='choice_tambah'),
 ]

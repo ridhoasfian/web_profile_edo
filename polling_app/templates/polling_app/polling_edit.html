@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<br>
+<div class="container">
+  <h1 style="text-align:center">Edit Polling Anda</h1>
+</div>
+<div class="row justify-content-md-center">
+  <div class="col-6">
+    <form action="" method="POST">
+      {% csrf_token %}
+      Text :
+      {{form.text}}
+      <button type="submit" name="button" class="btn btn-primary">Simpan Perubahan Anda</button>
+      <a href="{% url 'choice_tambah' poll.id %}" name="button" class="btn btn-warning">Tambah Choice pada Polling</a>
+    </form>
+  </div>
+</div>
+{% endblock %}
