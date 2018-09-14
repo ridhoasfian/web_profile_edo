@@ -21,6 +21,19 @@ class Poll(models.Model):
             return True
         return False
 
+    def get_hasil_voting(self):
+        hasil = []
+        for choice in self.choice_set.all():
+            dict = {}
+            dict['choice_text'] = choice.text
+            dict['jumlah_pemilih_choice'] = choice.jumlah_pemilih_choice()
+            if self.jumlah_peserta_poll():
+                dict['persentase'] = choice.jumlah_pemilih_choice() / self.jumlah_peserta_poll() * 100
+            else :
+                dict['persentase'] = 0
+            hasil.append(dict)
+        return hasil
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 class Choice(models.Model):

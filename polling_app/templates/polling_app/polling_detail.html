@@ -29,6 +29,19 @@
       {% endfor %}
       <button type="submit" name="button" class="btn btn-success">Vote !!!</button>
     </form>
+    {% if user_sudah_voting %}
+    <br>
+    <strong>Jumlah Partisipan : {{poll.jumlah_peserta_poll}} orang</strong>
+    <h6>hasil polling :  </h6>
+      {% for hasil in hasil %}
+      {{hasil.choice_text}}
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" style="width:{{hasil.persentase}}%;" aria-valuemin="0" aria-valuemax="100">
+            {{hasil.persentase}}
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
   </div>
 </div>
 

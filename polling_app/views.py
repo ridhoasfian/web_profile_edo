@@ -37,7 +37,9 @@ def polling_tambah(request):
 @login_required
 def polling_detail(request, id_polling):
     poll = get_object_or_404(Poll, pk=id_polling)
-    return render(request, 'polling_app/polling_detail.html', {'poll':poll})
+    hasil = poll.get_hasil_voting()
+    user_sudah_voting = poll.user_sudah_voting(request.user)
+    return render(request, 'polling_app/polling_detail.html', {'poll':poll, 'hasil':hasil, 'user_sudah_voting':user_sudah_voting})
 
 
 @login_required
