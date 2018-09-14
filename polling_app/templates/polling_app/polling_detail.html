@@ -1,6 +1,51 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block content %}
-{{poll.text}}
+{% block jquery %}
+  <script src="{% static 'js/jquery.js' %}"></script>
 {% endblock %}
+
+{% block content %}
+<br>
+<div class="container">
+  <h1 style="text-align:center">Silahkan pilih menurut hati nurani anda !</h1>
+</div>
+<div class="row justify-content-md-center">
+  <div class="col-6">
+    {% for pesan in messages %}
+      <div {% if pesan.tags %} class="{{pesan.tags}}" {% endif %} role="alert" id="pesan">
+        <strong>{{pesan}}!</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" id="close_pesan">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    {% endfor %}
+    <br>
+    <h5>{{poll.text}}</h5>
+    <form action="{% url 'poll_vote' poll.id %}" method="post">
+      {% csrf_token %}
+      {% for choice in poll.choice_set.all %}
+        <input type="radio" name="pilihan" value="{{choice.id}}">{{choice.text}} <br>
+      {% endfor %}
+      <button type="submit" name="button" class="btn btn-success">Vote !!!</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function(){
+    $('#close_pesan').click(function(){
+      $('#pesan').remove();
+    });
+  });
+</script>
+{% endblock %}
+
+
+
+
+
+
+
+
+#

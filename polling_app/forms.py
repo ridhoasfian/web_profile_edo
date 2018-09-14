@@ -19,5 +19,5 @@ class ChoiceTambahForm(forms.ModelForm):
         model = Poll
         fields = ['text']
         widgets = {
-            'text':forms.Textarea(attrs={'class':'form-control'}),
+            'text':forms.TextInput(attrs={'class':'form-control', 'placeholder':'choice text'}),
         }

@@ -23,4 +23,5 @@ urlpatterns = [
     path('polling_hapus/<int:id_polling>/', views.polling_hapus, name='polling_hapus'),
     path('polling_edit/<int:id_polling>/', views.polling_edit, name='polling_edit'),
     path('polling_edit/<int:id_polling>/choice_tambah/', views.choice_tambah, name='choice_tambah'),
+    path('poll_vote/<int:id_polling>/', views.poll_vote, name='poll_vote'),
 ]

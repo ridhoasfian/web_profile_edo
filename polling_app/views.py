@@ -71,14 +71,36 @@ def choice_tambah(request, id_polling):
     if poll.owner != request.user:
         return redirect('polling_list')
     if request.method == "POST":
-        pass
-        # form = ChoiceTambahForm(request.POST)
-        # if form.is_valid():
-        #
+        form = ChoiceTambahForm(request.POST)
+        if form.is_valid():
+            new_choice = Choice.objects.create(poll=poll, text=form.cleaned_data['text'])
+            new_choice.save()
+            messages.success(request, 'berhasil menambahkan choice pada polling ini', extra_tags='alert alert-success alert-dismissible fade show')
+            return redirect('polling_detail', id_polling)
     else:
         form = ChoiceTambahForm()
-    return render(request, 'polling_app/choice_tambah.html', {'form':form, 'poll':poll})
+    return render(request, 'polling_app/choice_tambah.html', {'poll':poll,'form':form})
 
+@login_required
+def poll_vote(request, id_polling):
+    poll = get_object_or_404(Poll, pk=id_polling)
+    choice_id = request.POST.get('pilihan')
+
+    if poll.user_sudah_voting(request.user):
+        messages.error(request, 'Maaf, Anda sudah Voting di Polling ini !', extra_tags='alert alert-danger alert-dismissible fade show')
+        return redirect('polling_detail', id_polling)
+
+    if request.method == "POST":
+        if choice_id:
+            pilihan = Choice.objects.get(id=choice_id)
+            new_vote = Vote(user=request.user, poll=poll, choice=pilihan)
+            new_vote.save()
+            messages.success(request, 'terimakasih telah berpartisipasi ;)', extra_tags='alert alert-success alert-dismissible fade show')
+            return redirect('polling_detail', id_polling)
+        else:
+            messages.error(request, 'Maaf, Anda belum memilih di Polling ini !', extra_tags='alert alert-danger alert-dismissible fade show')
+            return redirect('polling_detail', id_polling)
+    return redirect('polling_detail', id_polling)
 
 
 
