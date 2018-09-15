@@ -27,8 +27,7 @@ urlpatterns = [
     path('my_project/to_do_app/', include('to_do_app.urls')),
     path('my_project/budget_app/', include('budget_app.urls')),
     path('my_project/polling_app/', include('polling_app.urls')),
+    path('my_project/weather_app/', include('weather_app.urls')),
 
-    # path('budget_app/', include('budget_app/urls')),
     # path('calendar_app/', include('calendar_app/urls')),
-    # path('weather_app/', include('weather_app/urls')),
 ]
