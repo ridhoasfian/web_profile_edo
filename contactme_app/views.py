@@ -1,28 +1,29 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.conf import settings
 from .forms import *
+from django.contrib import messages
 
 # Create your views here.
 def contact_me(request):
-
-    subject = 'Thank you for registering to our site'  # judul email
-    message = ' it  means a world to us '              # isi email
-    email_from = settings.EMAIL_HOST_USER              # dari
-    recipient_list = ['gumiritibu@poly-swarm.com',]    # kepada
-    # send_mail( subject, message, email_from, recipient_list, fail_silently=False )
-
     if request.method == "POST":
         form = ContactmeForm(request.POST)
         if form.is_valid():
+            if request.user.is_authenticated :
+                username = request.user.username
+                dari = request.user.email
+            else:
+                username = form.cleaned_data['username']
+                dari = form.cleaned_data['email']
             first_name = form.cleaned_data['first_name']
-            last_name = form.cleaned_data['lastName']
-            username = form.cleaned_data['username']
-            email = form.cleaned_data['email']
+            last_name = form.cleaned_data['last_name']
             alamat = form.cleaned_data['alamat']
             pesan = form.cleaned_data['pesan']
+            isi_pesan = 'first name = '+first_name+'\nlast name = '+last_name+'\nusername = '+username+'\nemail = '+dari+'\nalamat = '+alamat+'\npesan :\n'+pesan+'  '
 
-            send_mail( 'dari web asfianridho.pythonanywhere.com', pesan, email, ['ridhoasfian86@gmail.com',], fail_silently=False )
+            # send_mail( judul, isi_pesan, dari, tujuan, fail_silently=False )
+            send_mail( 'dari web asfianridho.pythonanywhere.com', isi_pesan, dari, ['ridhoasfian86@gmail.com',], fail_silently=False )
+            messages.success(request, 'terima kasih atas tanggapan anda !', extra_tags='alert alert-warning alert-dismissible fade show')
             return redirect('contact_me')
     else:
         form = ContactmeForm()
