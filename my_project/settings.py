@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'weather_app',
     'to_do_app',
     'polling_app',
+    'contactme_app',
 ]
 
 MIDDLEWARE = [
@@ -123,6 +124,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
+"""
+    settingan unda sorang dibawah ini
+"""
+
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"),]  #static default
 
@@ -130,3 +135,18 @@ LOGIN_URL = '/accounts/login_user/'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'ridhoasfian86@gmail.com'
+EMAIL_HOST_PASSWORD = '1d0ntkn0wwh0@m1'
+EMAIL_USE_TLS = True
+
+
+
+
+
+
+
+
+#

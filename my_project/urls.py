@@ -19,15 +19,17 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
     path('', views.home, name='home'),
-    path('Contact_me/', views.Contact_me, name='Contact_me'),
-    path('my_project/', views.my_project, name='my_project'),
+    
+    path('contactme_app/', include('contactme_app.urls')),
     path('accounts/', include('accounts.urls')),
 
+    path('my_project/', views.my_project, name='my_project'),
     path('my_project/to_do_app/', include('to_do_app.urls')),
     path('my_project/budget_app/', include('budget_app.urls')),
     path('my_project/polling_app/', include('polling_app.urls')),
     path('my_project/weather_app/', include('weather_app.urls')),
+    path('my_project/calendar_app/', include('calendar_app.urls')),
 
-    # path('calendar_app/', include('calendar_app/urls')),
 ]
