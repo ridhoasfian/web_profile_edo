@@ -1,4 +1,4 @@
-"""my_project URL Configuration
+"""artikel_app URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.1/topics/http/urls/
@@ -16,21 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-
-    path('', views.home, name='home'),
-    path('accounts/', include('accounts.urls')),
-
-    path('contactme_app/', include('contactme_app.urls')),
-    path('artikel_app/', include('artikel_app.urls')),
-
-    path('my_project/', views.my_project, name='my_project'),
-    path('my_project/to_do_app/', include('to_do_app.urls')),
-    path('my_project/budget_app/', include('budget_app.urls')),
-    path('my_project/polling_app/', include('polling_app.urls')),
-    path('my_project/weather_app/', include('weather_app.urls')),
-    path('my_project/calendar_app/', include('calendar_app.urls')),
-
-]
+    path('artikel_list/', views.artikel_list, name='artikel_list'),
+    path('artikel_tambah/', views.artikel_tambah, name='artikel_tambah'),
+    path('artikel_edit/<int:id_artikel>', views.artikel_edit, name='artikel_edit'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

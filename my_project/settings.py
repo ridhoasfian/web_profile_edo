@@ -44,6 +44,9 @@ INSTALLED_APPS = [
     'to_do_app',
     'polling_app',
     'contactme_app',
+    'artikel_app',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -130,6 +133,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"),]  #static default
+
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_IMAGE_BACKEND = 'pillow'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = '/media/'
 
 LOGIN_URL = '/accounts/login_user/'
 
