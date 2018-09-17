@@ -1,6 +1,16 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block jquery %}
+  <script src="{% static 'js/ckeditor.js' %}"></script>
+{% endblock %}
+
 {% block content %}
   artikel_tambah
+  <form method="POST">
+    {% csrf_token %}
+    {{form.judul}}
+    
+    <button type="submit" name="button">Simpan Artikel</button>
+  </form>
 {% endblock %}
