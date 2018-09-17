@@ -132,11 +132,12 @@ USE_TZ = True
 """
 
 STATIC_URL = '/static/'
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"),]  #static default
-STATIC_ROOT = [os.path.join(BASE_DIR, "static/"),]  #static default
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"),]  #static default
+# STATIC_ROOT = os.path.join(BASE_DIR, "static/")  #static default
 
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 CKEDITOR_IMAGE_BACKEND = 'pillow'
+CKEDITOR_JQUERY_URL = '/static/js/jquery.js'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'media/'

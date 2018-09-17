@@ -1,15 +1,11 @@
 from django import forms
-from .models import Artikel, Kategori
-from ckeditor_uploader.fields import RichTextUploadingField
-from ckeditor.fields import RichTextField
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
-from ckeditor.widgets import CKEditorWidget
 
 class ArtikelTambahForm(forms.Form):
-    # pass
     judul = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
-    # kategori =
-    # pub_date =
-    # created_by =
-    # sumber =
-    # disunting =
+    isi = forms.CharField(widget=CKEditorUploadingWidget())
+    created_by = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
+    sumber = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
+
+class KategoriTambahForm(forms.Form):
+    nama = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
