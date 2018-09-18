@@ -9,7 +9,11 @@ class Artikel(models.Model):
     sumber = models.CharField(max_length=500)
     pub_date = models.DateField()
     edit_date = models.DateField()
+    def __str__(self):
+        return self.judul
 
 class Kategori(models.Model):
     artikel = models.ForeignKey('Artikel', on_delete=models.CASCADE)
     nama = models.CharField(max_length=200)
+    def __str__(self):
+        return self.nama

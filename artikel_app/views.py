@@ -7,9 +7,9 @@ def artikel_list(request):
 def artikel_tambah(request):
     if request.method == "POST":
         pass
-        form = ArtikelTambahForm(request.POST)
-        if form.is_valid():
-            
+        # form = ArtikelTambahForm(request.POST)
+        # if form.is_valid():
+        #
     else:
         form = ArtikelTambahForm()
     return render(request, 'artikel_app/artikel_tambah.html', {'form':form})
