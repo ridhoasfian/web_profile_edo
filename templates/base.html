@@ -35,7 +35,7 @@
               <a class="nav-link" href="{% url 'my_project' %}">My Project</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" id="dropdown_artikel">Artikel</a>
+              <a class="nav-link" href="{% url 'artikel_list' %}" id="dropdown_artikel">Artikel</a>
               <div id="submenu">
                 <a href="#">Teknologi</a> <br>
                 <a href="#">Movie</a> <br>
@@ -70,8 +70,11 @@
 
   <script>
   $('#submenu').hide();
+    $('#dropdown_artikel').mouseenter(function(){
+      $('#submenu').slideToggle(500);
+    });
 
-    $('#dropdown_artikel').click(function(){
+    $(' nav ').mouseleave(function(){
       $('#submenu').slideToggle(500);
     });
   </script>

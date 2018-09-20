@@ -3,6 +3,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 
 # Create your models here.
 class Artikel(models.Model):
+    kategori = models.ManyToManyField('Kategori')
     judul = models.CharField(max_length=200)
     isi = RichTextUploadingField()
     created_by = models.CharField(max_length=200)
@@ -13,7 +14,6 @@ class Artikel(models.Model):
         return self.judul
 
 class Kategori(models.Model):
-    artikel = models.ForeignKey('Artikel', on_delete=models.CASCADE)
     nama = models.CharField(max_length=200)
     def __str__(self):
         return self.nama

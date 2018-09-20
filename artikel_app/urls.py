@@ -22,7 +22,26 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
 
     path('artikel_list/', views.artikel_list, name='artikel_list'),
+    path('artikel_detail/<int:id_artikel>/', views.artikel_detail, name='artikel_detail'),
     path('artikel_tambah/', views.artikel_tambah, name='artikel_tambah'),
-    path('artikel_edit/<int:id_artikel>', views.artikel_edit, name='artikel_edit'),
+    path('artikel_edit/<int:id_artikel>/', views.artikel_edit, name='artikel_edit'),
+    path('artikel_delete/<int:id_artikel>/', views.artikel_delete, name='artikel_delete'),
+
+    path('kategori_list/', views.kategori_list, name='kategori_list'),
+    # path('kategori_tambah/', views.kategori_tambah, name='kategori_tambah'),
+    path('kategori_edit/<int:id_kategori>/', views.kategori_edit, name='kategori_edit'),
+    path('kategori_delete/<int:id_kategori>/', views.kategori_delete, name='kategori_delete'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+
+
+
+
+
+
+
+
+
+#

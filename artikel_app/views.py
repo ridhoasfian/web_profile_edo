@@ -6,28 +6,80 @@ import datetime
 
 # Create your views here.
 def artikel_list(request):
-    return render(request, 'artikel_app/artikel_list.html', {})
+    artikel = Artikel.objects.all()
+    return render(request, 'artikel_app/artikel_list.html', {'artikel':artikel})
+
 
 def artikel_tambah(request):
     if request.method == "POST":
         form = ArtikelTambahForm(request.POST)
         if form.is_valid():
-            judul = form.cleaned_data['judul']
-            isi = form.cleaned_data['isi']
-            created_by = form.cleaned_data['created_by']
-            sumber = form.cleaned_data['sumber']
-
-            new_artikel = Artikel.objects.create(judul=judul, isi=isi, created_by=created_by, sumber=sumber, pub_date=datetime.datetime.now(), edit_date=datetime.datetime.now())
+            new_artikel = form.save(commit=False)
+            new_artikel.pub_date = datetime.datetime.now()
+            new_artikel.edit_date = datetime.datetime.now()
             new_artikel.save()
-
-            new_kategori = Kategori.objects.create(artikel=new_artikel, nama='nama kategori')
-            new_kategori.save()
-
+            form.save_m2m()
             messages.success(request, 'berhasil menambahkan Artikel !', extra_tags='alert alert-success alert-dismissible fade show')
             return redirect('artikel_list')
     else:
         form = ArtikelTambahForm()
     return render(request, 'artikel_app/artikel_tambah.html', {'form':form})
 
-def artikel_edit(request):
-    pass
+
+def artikel_edit(request, id_artikel):
+    artikel = get_object_or_404(Artikel, pk=id_artikel)
+    if request.method == "POST":
+        form = ArtikelEditForm(request.POST, instance=artikel)
+        if form.is_valid():
+            edit = form.save(commit=False)
+            edit.edit_date = datetime.datetime.now()
+            edit.save()
+            form.save_m2m()
+            messages.success(request, 'berhasil menyunting Artikel !', extra_tags='alert alert-success alert-dismissible fade show')
+            return redirect('artikel_detail', id_artikel)
+    else:
+        form = ArtikelEditForm(instance=artikel)
+    return render(request, 'artikel_app/artikel_edit.html', {'form':form})
+
+
+def artikel_detail(request, id_artikel):
+    artikel = get_object_or_404(Artikel, pk=id_artikel)
+    return render(request, 'artikel_app/artikel_detail.html', {'artikel':artikel})
+
+
+def artikel_delete(request, id_artikel):
+    artikel = get_object_or_404(Artikel, pk=id_artikel)
+    artikel.delete()
+    messages.success(request, 'berhasil menghapus Artikel !', extra_tags='alert alert-success alert-dismissible fade show')
+    return redirect('artikel_list')
+
+
+def kategori_list(request, id_kategori):
+    return render(request, 'artikel_app/kategori_list.html', {})
+
+
+def kategori_edit(request, id_kategori):
+    return render(request, 'artikel_app/kategori_edit.html', {})
+
+def kategori_delete(request, id_kategori):
+    kategori = get_object_or_404(Kategori, pk=id_kategori)
+    kategori.delete()
+    messages.success(request, 'berhasil menghapus Data Kategori !', extra_tags='alert alert-success alert-dismissible fade show')
+    return redirect('kategori_list')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    #

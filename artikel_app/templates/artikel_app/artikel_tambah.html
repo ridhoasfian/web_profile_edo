@@ -12,6 +12,7 @@
       {% csrf_token %}
       {{ form.media }}
 
+
       judul :
       {{form.judul}}
       isi :
@@ -19,7 +20,10 @@
       created by :
       {{form.created_by}}
       sumber :
-      {{form.sumber}} <br>
+      {{form.sumber}}
+      kategori : <br>
+      {{form.kategori}} <br>
+      <span style="color:blue">*tekan ctrl dan click untuk memilih lebih dari satu</span> <br>
       <button type="submit" name="button" class="btn btn-success">Simpan Artikel</button>
     </form>
   </div>
