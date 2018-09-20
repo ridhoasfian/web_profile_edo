@@ -15,8 +15,8 @@ Including another URLconf
 """
 from django.urls import path, include
 from . import views
-from django.conf import settings
-from django.conf.urls.static import static
+# from django.conf import settings
+# from django.conf.urls.static import static
 
 urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
@@ -32,7 +32,7 @@ urlpatterns = [
     path('kategori_edit/<int:id_kategori>/', views.kategori_edit, name='kategori_edit'),
     path('kategori_delete/<int:id_kategori>/', views.kategori_delete, name='kategori_delete'),
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
 
 
 

@@ -131,9 +131,15 @@ USE_TZ = True
     settingan unda sorang dibawah ini
 """
 
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+    },
+}
+
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"),]  #static default
-# STATIC_ROOT = os.path.join(BASE_DIR, "static/")  #static default
+# STATIC_ROOT = os.path.join(BASE_DIR, "static/")  #cukup sekali perintah collectstatic aja. mbah tu comment baris ini
 
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 CKEDITOR_IMAGE_BACKEND = 'pillow'

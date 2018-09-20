@@ -19,15 +19,9 @@
 
           <div class="blog-post">
             <h2 class="blog-post-title">{{artikel.judul}}</h2>
-            <p class="blog-post-meta">{{artikel.edit_date}} || Sumber : <a href="#">{{artikel.sumber}}</a></p>
+            <p class="blog-post-meta">{{artikel.edit_date}} || Sumber : <a target="{% if artikel.sumber_url is  not None %} _blank {% endif %}" href="{% if artikel.sumber_url is None %} # {% else %} {{artikel.sumber_url}} {% endif %}">{{artikel.sumber}}</a></p>
             {{artikel.isi | safe}}
           </div><!-- /.blog-post -->
-
-
-          <span class="blog-pagination">
-            <a class="btn btn-outline-primary" href="{% url 'artikel_list' %}">Kembali ke List Bacaan</a>
-          </span>
-
         </div><!-- /.blog-main -->
 
         <aside class="col-md-4 blog-sidebar">
@@ -67,6 +61,9 @@
 
       </div><!-- /.row -->
 
+      <p class="blog-pagination">
+        <a class="btn btn-outline-primary" href="{% url 'artikel_list' %}">Kembali ke List Bacaan</a>
+      </p>
       <p>
         <a href="#" class="float-right">Back to top</a>
       </p>

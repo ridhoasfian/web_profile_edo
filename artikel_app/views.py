@@ -7,7 +7,8 @@ import datetime
 # Create your views here.
 def artikel_list(request):
     artikel = Artikel.objects.all()
-    return render(request, 'artikel_app/artikel_list.html', {'artikel':artikel})
+    kategori = Kategori.objects.all()
+    return render(request, 'artikel_app/artikel_list.html', {'artikel':artikel, 'kategori':kategori})
 
 
 def artikel_tambah(request):

@@ -11,7 +11,7 @@
         </div>
       </div>
 
-      
+
     </div>
 
     <main role="main" class="container">
@@ -49,10 +49,9 @@
           <div class="p-3">
             <h4 class="font-italic">Kategori</h4>
             <ol class="list-unstyled">
-              <li><a href="#">Movie</a></li>
-              <li><a href="#">Agama</a></li>
-              <li><a href="#">Hobie</a></li>
-              <li><a href="#">Teknologi</a></li>
+              {% for kategori in kategori %}
+                <li><a href="#">{{kategori.nama}}</a></li>
+              {% endfor %}
             </ol>
           </div>
 
