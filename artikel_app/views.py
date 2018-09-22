@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import *
 from .models import *
 import datetime
@@ -8,7 +9,22 @@ import datetime
 def artikel_list(request):
     artikel = Artikel.objects.all()
     kategori = Kategori.objects.all()
-    return render(request, 'artikel_app/artikel_list.html', {'artikel':artikel, 'kategori':kategori})
+
+    if 'kategori' in request.GET:
+        ambil_param_url = request.GET.get('kategori', '') # ambil nilai param url 'Kategori'
+        object_kategori = get_object_or_404(Kategori, nama=ambil_param_url)
+        artikel = object_kategori.artikel_set.all()
+
+    #paginator
+    paginator = Paginator(artikel, 5) # batasi 5 data perhalaman
+    page = request.GET.get('page')  # ambil nilai param url 'page'
+    artikel = paginator.get_page(page) # ambil data dari halaman
+
+    #menggabung param url
+    ambil_url = request.GET.copy() # ambil semua param url key dan val
+    param_url = ambil_url.pop('page', True) and ambil_url.urlencode()
+
+    return render(request, 'artikel_app/artikel_list.html', {'artikel':artikel, 'kategori':kategori, 'param_url':param_url})
 
 
 def artikel_tambah(request):
@@ -45,7 +61,8 @@ def artikel_edit(request, id_artikel):
 
 def artikel_detail(request, id_artikel):
     artikel = get_object_or_404(Artikel, pk=id_artikel)
-    return render(request, 'artikel_app/artikel_detail.html', {'artikel':artikel})
+    kategori = Kategori.objects.all()
+    return render(request, 'artikel_app/artikel_detail.html', {'artikel':artikel, 'kategori':kategori})
 
 
 def artikel_delete(request, id_artikel):

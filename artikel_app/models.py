@@ -19,6 +19,27 @@ class Artikel(models.Model):
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 class Kategori(models.Model):
+    class Meta:
+        ordering = ['nama',]
+
     nama = models.CharField(max_length=200)
     def __str__(self):
         return self.nama
+
+    def artikel_berdasarkan_kategori(self):
+        return self.artikel_set.all()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#
