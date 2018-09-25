@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'budget_app',
-    'calendar_app',
+    'schedule_app',
     'weather_app',
     'to_do_app',
     'polling_app',

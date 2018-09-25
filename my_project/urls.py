@@ -33,6 +33,6 @@ urlpatterns = [
     path('my_project/budget_app/', include('budget_app.urls')),
     path('my_project/polling_app/', include('polling_app.urls')),
     path('my_project/weather_app/', include('weather_app.urls')),
-    path('my_project/calendar_app/', include('calendar_app.urls')),
+    path('my_project/schedule_app/', include('schedule_app.urls')),
 
 ]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

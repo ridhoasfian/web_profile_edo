@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container jumbotron">
+  <h1 style="text-align:center">{{schedule.nama}}</h1>
+  <hr>
+  <h5>{{schedule.tanggal}}</h5>
+  <p>{{schedule.deskripsi}}</p>
+</div>
+{% endblock %}

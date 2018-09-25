@@ -1,4 +1,4 @@
-"""calendar_app URL Configuration
+"""schedule URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.1/topics/http/urls/
@@ -17,6 +17,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('calendar_index/', views.calendar_index, name='calendar_index'),
-
+    path('schedule_list/', views.schedule_list, name='schedule_list'),
+    path('schedule_tambah/', views.schedule_tambah, name='schedule_tambah'),
+    path('schedule_detail/<int:id_schedule>/', views.schedule_detail, name='schedule_detail'),
+    path('schedule_delete/<int:id_schedule>/', views.schedule_delete, name='schedule_delete'),
 ]
