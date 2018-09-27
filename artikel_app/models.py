@@ -7,6 +7,7 @@ class Artikel(models.Model):
         ordering = ['-edit_date',]
 
     kategori = models.ManyToManyField('Kategori')
+    # foto_sampul = models.
     judul = models.CharField(max_length=200)
     isi = RichTextUploadingField()
     created_by = models.CharField(max_length=200)

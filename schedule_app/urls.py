@@ -17,6 +17,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path('testing/', views.testing, name='testing'),
     path('schedule_list/', views.schedule_list, name='schedule_list'),
     path('schedule_tambah/', views.schedule_tambah, name='schedule_tambah'),
     path('schedule_detail/<int:id_schedule>/', views.schedule_detail, name='schedule_detail'),

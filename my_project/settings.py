@@ -146,7 +146,8 @@ CKEDITOR_IMAGE_BACKEND = 'pillow'
 CKEDITOR_JQUERY_URL = '/static/js/jquery.js'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = 'media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media") 
+# MEDIA_ROOT = 'media/'
 
 LOGIN_URL = '/accounts/login_user/'
 

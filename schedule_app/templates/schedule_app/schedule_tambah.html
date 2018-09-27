@@ -2,47 +2,23 @@
 {% load static %}
 
 {% block jquery %}
-<link href="{% static 'js/jquery-ui.css' %} " rel="stylesheet">
-<link href="{% static 'js/jquery.datetimepicker.css' %}" rel="stylesheet">
-<script src="{% static 'js/jquery.js' %}"></script>
-<script src="{% static 'js/jquery-ui.js' %}"></script>
-<script src="{% static 'js/jquery.datetimepicker.full.min.js' %}"></script>
-<script src="{% static 'js/jquery.datetimepicker.full.js' %}"></script>
+  <script src="{% static 'js/jquery.js' %}"></script>
+  <script src="{% static 'js/all.js' %}"></script>
 {% endblock %}
 
 {% block content %}
-<div class="row justify-content-md-center">
-  <div class="col-6">
-    <h2>Tambah Schedule</h2>
-    <form method="POST">
+  <div class="container">
+    <h2 style="text-align:center">masukkan schedule anda</h2>
+    <form method="post">
       {% csrf_token %}
+
       nama :
-      {{form.nama}}
-      tanggal :
-      {{form.tanggal}}
+      {{form.nama}} <br>
+      tanggal : <span style="color:blue">*contoh format tanggal : 2018-09-11 12:00</span>
+      {{form.tanggal}} <br>
       deskripsi :
       {{form.deskripsi}} <br>
-      {{forms.holiday_date}}
-      <input type="text" id="datetimepicker">
-      <button type="submit" name="button" class="btn btn-success">Simpan Schedule</button>
+      <button type="submit" name="button" class="btn btn-success">Simpan</button>
     </form>
   </div>
-</div>
-
-<script>
-  $(document).ready(function(){
-    $( "#datetimepicker" ).datetimepicker();
-  });
-</script>
 {% endblock %}
-
-
-
-
-
-
-
-
-
-
-#
