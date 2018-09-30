@@ -29,7 +29,7 @@ def artikel_list(request):
 
 def artikel_tambah(request):
     if request.method == "POST":
-        form = ArtikelTambahForm(request.POST)
+        form = ArtikelTambahForm(request.POST, request.FILES)
         if form.is_valid():
             new_artikel = form.save(commit=False)
             new_artikel.pub_date = datetime.datetime.now()
@@ -41,6 +41,12 @@ def artikel_tambah(request):
     else:
         form = ArtikelTambahForm()
     return render(request, 'artikel_app/artikel_tambah.html', {'form':form})
+
+
+def handle_uploaded_file(f):
+    with open('some/file/name.txt', 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
 
 
 def artikel_edit(request, id_artikel):

@@ -5,7 +5,7 @@ from .models import *
 class ArtikelTambahForm(forms.ModelForm):
     class Meta:
         model = Artikel
-        fields = ['judul', 'isi', 'created_by', 'sumber', 'kategori']
+        fields = ['judul', 'isi', 'created_by', 'sumber', 'kategori', 'foto_sampul']
         widgets = {
             'judul':forms.TextInput(attrs={'class':'form-control'}),
             'created_by':forms.TextInput(attrs={'class':'form-control'}),

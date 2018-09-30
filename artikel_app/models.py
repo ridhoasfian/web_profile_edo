@@ -7,7 +7,7 @@ class Artikel(models.Model):
         ordering = ['-edit_date',]
 
     kategori = models.ManyToManyField('Kategori')
-    # foto_sampul = models.
+    foto_sampul = models.ImageField(default='default.png', upload_to='foto_sampul_artikel/%Y/%m/%d/', blank=True)
     judul = models.CharField(max_length=200)
     isi = RichTextUploadingField()
     created_by = models.CharField(max_length=200)

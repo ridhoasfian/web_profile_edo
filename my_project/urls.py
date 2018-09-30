@@ -35,4 +35,7 @@ urlpatterns = [
     path('my_project/weather_app/', include('weather_app.urls')),
     path('my_project/schedule_app/', include('schedule_app.urls')),
 
+    path('my_project/testing/', include('testing.urls')),
+
+
 ]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

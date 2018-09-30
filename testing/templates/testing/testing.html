@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  nama = {{form.nama}}
+  foto = {{form.foto}}
+  <br>
+  <button type="submit" class="btn btn-success" name="button">Simpan</button>
+</form>
+{% endblock %}
