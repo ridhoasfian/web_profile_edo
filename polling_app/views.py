@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Count
 from .forms import *
 from .models import *
 import datetime
@@ -9,7 +11,27 @@ import datetime
 # Create your views here.
 def polling_list(request):
     poll = Poll.objects.all()
-    return render(request, 'polling_app/polling_list.html', {'poll':poll})
+
+    if 'abjad' in request.GET:
+        poll = poll.order_by('text')
+
+    if 'pub_date' in request.GET:
+        poll = poll.order_by('-pub_date')
+
+    if 'peserta_voting' in request.GET:
+        poll = poll.annotate(Count('vote')).order_by('-vote__count')
+
+
+    #paginator
+    paginator = Paginator(poll, 5) # batasi 5 data perhalaman
+    page = request.GET.get('page')  # ambil nilai param url 'page'
+    poll = paginator.get_page(page) # ambil data dari halaman
+
+    #menggabung param url
+    ambil_url = request.GET.copy() # ambil semua param url key dan val
+    param_url = ambil_url.pop('page', True) and ambil_url.urlencode()
+
+    return render(request, 'polling_app/polling_list.html', {'poll':poll, 'param_url':param_url})
 
 @login_required
 def polling_tambah(request):

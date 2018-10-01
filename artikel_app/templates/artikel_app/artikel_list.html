@@ -1,82 +1,149 @@
-{% extends 'base.html' %}
 {% load static %}
 
-{% block content %}
-<div class="container">
-      <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
-        <div class="col-md-6 px-0">
-          <h1 class="display-4 font-italic">Just Read...</h1>
-          <p class="lead my-3">"the more you <code>READ</code> the more <code>THINGS</code> you know. the more that you <code>LEARN</code> the more <code>PLACES</code> you'll go."</p>
-          <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">-Dr. Seuss</a></p>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Artikel List</title>
+
+    <link href="{% static 'bootstrap/css/bootstrap.min.css'%} " rel="stylesheet">
+    <link href="{% static 'css/navbar.css'%} " rel="stylesheet">
+    <link href="{% static 'css/sticky-footer-navbar.css'%}" rel="stylesheet">
+
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/all.js' %}"></script>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
+        <a class="navbar-brand" href="{% url 'home' %}">Ridho Asfian</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExample09">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'my_project' %}">My Project</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'artikel_list' %}" id="dropdown_artikel">Artikel</a>
+              <div id="submenu">
+                {% for kategori in kategori %}
+                  <a href="{% url 'artikel_list' %}?kategori={{kategori.nama}}">{{kategori.nama}}</a> <br>
+                {% endfor %}
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/contactme_app/">Contact Me</a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-md-0">
+            <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
         </div>
-      </div>
-
-
+        {% if request.user.is_authenticated %}
+        <a class="btn btn-outline-primary" style="margin-left:8px" href="{% url 'logout_user' %}">Logout</a>
+        {% else %}
+        <a class="btn btn-outline-primary" style="margin-left:8px" href="{% url 'login_user' %}">Sign In</a>
+        {% endif %}
+      </nav>
     </div>
 
-    <main role="main" class="container">
-      <div class="row">
-        <div class="col-md-8 blog-main">
-          <h3 class="pb-3 mb-4 font-italic border-bottom"></h3>
-
-          <div class="blog-post">
-            <div class="my-3 p-3 bg-white rounded shadow-sm">
-              <h6 class="border-bottom border-gray pb-2 mb-0">Recent updates</h6>
-              {% for artikel in artikel %}
-                <p class="media-body pb-3 mb-0 small lh-125 border-top border-gray">
-                  <h3><strong class="d-block text-gray-dark">{{artikel.judul}}</strong></h3>
-                  {{artikel.isi | safe | slice:':225'}}...
-                  <br><a href="{%url 'artikel_detail' artikel.id %}">lanjutkan membaca</a>
-                </p>
-              {% endfor %}
+    <div class="container">
+          <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
+            <div class="col-md-6 px-0">
+              <h1 class="display-4 font-italic">Just Read...</h1>
+              <p class="lead my-3">"the more you <code>READ</code> the more <code>THINGS</code> you know. the more that you <code>LEARN</code> the more <code>PLACES</code> you'll go."</p>
+              <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">-Dr. Seuss</a></p>
             </div>
-          </div><!-- /.blog-post -->
-
-          <div class="pagination">
-            <span class="step-links">
-              {% if artikel.has_previous %}
-              <a href="?page=1&{{param_url}}">&laquo; first</a>
-              <a href="?page={{ artikel.previous_page_number }}&{{param_url}}">previous</a>
-              {% endif %}
-
-              <span class="current">
-                Page {{ artikel.number }} of {{ artikel.paginator.num_pages }}.
-              </span>
-
-              {% if artikel.has_next %}
-              <a href="?page={{ artikel.next_page_number }}&{{param_url}}">next</a>
-              <a href="?page={{ artikel.paginator.num_pages }}&{{param_url}}">last &raquo;</a>
-              {% endif %}
-            </span>
           </div>
 
-        </div><!-- /.blog-main -->
 
-        <aside class="col-md-4 blog-sidebar">
-          <div class="p-3 mb-3 bg-light rounded">
-            <h6><p class="mb-0">A Reader Lives a <em>Thousand Lives</em> Before He Dies. The Man Who Never Reads <em>Lives Only Once.</em></p></h6>
-            <h4 class="font-italic">George R.R. Martin</h4>
-          </div>
+        </div>
 
-          <div class="p-3">
-            <h4 class="font-italic">Kategori</h4>
-            <ol class="list-unstyled">
-              <li><a href="{% url 'artikel_list' %}">Semua Kategori</a></li>
-              {% for kategori in kategori %}
-                <li><a href="?kategori={{kategori.nama}}">{{kategori.nama}}</a></li>
-              {% endfor %}
-            </ol>
-          </div>
+        <main role="main" class="container">
+          <div class="row">
+            <div class="col-md-8 blog-main">
+              <h3 class="pb-3 mb-4 font-italic border-bottom"></h3>
 
-        </aside><!-- /.blog-sidebar -->
+              <div class="blog-post">
+                <div class="my-3 p-3 bg-white rounded shadow-sm">
+                  <h6 class="border-bottom border-gray pb-2 mb-0">Recent updates</h6>
+                  {% for artikel in artikel %}
+                    <p class="media-body pb-3 mb-0 small lh-125 border-top border-gray">
+                      <h3><strong class="d-block text-gray-dark">{{artikel.judul}}</strong></h3>
+                      {{artikel.isi | safe | slice:':225'}}...
+                      <br><a href="{%url 'artikel_detail' artikel.id %}">lanjutkan membaca</a>
+                    </p>
+                  {% endfor %}
+                </div>
+              </div><!-- /.blog-post -->
 
-      </div><!-- /.row -->
+              <div class="pagination">
+                <span class="step-links">
+                  {% if artikel.has_previous %}
+                  <a href="?page=1&{{param_url}}">&laquo; first</a>
+                  <a href="?page={{ artikel.previous_page_number }}&{{param_url}}">previous</a>
+                  {% endif %}
+
+                  <span class="current">
+                    Page {{ artikel.number }} of {{ artikel.paginator.num_pages }}.
+                  </span>
+
+                  {% if artikel.has_next %}
+                  <a href="?page={{ artikel.next_page_number }}&{{param_url}}">next</a>
+                  <a href="?page={{ artikel.paginator.num_pages }}&{{param_url}}">last &raquo;</a>
+                  {% endif %}
+                </span>
+              </div>
+
+            </div><!-- /.blog-main -->
+
+            <aside class="col-md-4 blog-sidebar">
+              <div class="p-3 mb-3 bg-light rounded">
+                <h6><p class="mb-0">A Reader Lives a <em>Thousand Lives</em> Before He Dies. The Man Who Never Reads <em>Lives Only Once.</em></p></h6>
+                <h4 class="font-italic">George R.R. Martin</h4>
+              </div>
+
+              <div class="p-3">
+                <h4 class="font-italic">Kategori</h4>
+                <ol class="list-unstyled">
+                  <li><a href="{% url 'artikel_list' %}">Semua Kategori</a></li>
+                  {% for kategori in kategori %}
+                    <li><a href="?kategori={{kategori.nama}}">{{kategori.nama}}</a></li>
+                  {% endfor %}
+                </ol>
+              </div>
+
+            </aside><!-- /.blog-sidebar -->
+
+          </div><!-- /.row -->
 
 
 
-      <p>
-        <a href="#" class="float-right">Back to top</a>
-      </p>
-    </main><!-- /.container -->
+          <p>
+            <a href="#" class="float-right">Back to top</a>
+          </p>
+        </main><!-- /.container -->
 
-{% endblock %}
+        <script>
+        $('#submenu').hide();
+          $('#dropdown_artikel').mouseenter(function(){
+            $('#submenu').slideToggle(500);
+          });
+
+          $(' nav ').mouseleave(function(){
+            $('#submenu').slideToggle(500);
+          });
+        </script>
+
+  </body>
+</html>

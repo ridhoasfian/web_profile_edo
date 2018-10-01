@@ -22,16 +22,41 @@
         </button>
       </div>
       {% endfor %}
-      <a href="{% url 'polling_tambah' %}" class="btn btn-primary">Tambah Polling <i style="margin-left:8px" class="far fa-plus-square"></i></a>
+      urutkan berdasarkan : <br>
+      <a href="?abjad=True" class="btn btn-{% if 'abjad' in request.GET %}secondary{% else %}info{% endif %}">A - Z</a>
+      <a href="?pub_date=True" class="btn btn-{% if 'pub_date' in request.GET %}secondary{% else %}info{% endif %}">Publish Date</a>
+      <a href="?peserta_voting=True" class="btn btn-{% if 'peserta_voting' in request.GET %}secondary{% else %}info{% endif %}">Peserta Voting</a>
+      <br>
+      <a href="{% url 'polling_tambah' %}" style="margin-top:8px" class="btn btn-primary">Tambah Polling <i style="margin-left:8px" class="far fa-plus-square"></i></a>
       <br>
       {% for poll in poll %}
       <div class="list-group-item list-group-item-action list-group-item-dark">
         <a href="{% url 'polling_detail' poll.id %}">{{poll}}{% if request.user == poll.owner %}<a href="{% url 'polling_hapus' poll.id %}" class="float-right"><i class="fas fa-times-circle"></i></a> <a href="{% url 'polling_edit' poll.id %}" class="float-right" style="margin-right:8px"><i class="far fa-edit"></i></a> {%endif%} </a>
       </div>
       {% endfor %}
+
+      <div class="pagination">
+        <span class="step-links">
+          {% if poll.has_previous %}
+          <a href="?page=1&{{param_url}}">&laquo; first</a>
+          <a href="?page={{ poll.previous_page_number }}&{{param_url}}">previous</a>
+          {% endif %}
+
+          <span class="current">
+            Page {{ poll.number }} of {{ poll.paginator.num_pages }}.
+          </span>
+
+          {% if poll.has_next %}
+          <a href="?page={{ poll.next_page_number }}&{{param_url}}">next</a>
+          <a href="?page={{ poll.paginator.num_pages }}&{{param_url}}">last &raquo;</a>
+          {% endif %}
+        </span>
+      </div>
+
     </div>
   </div>
 </div>
+
 
 <script type="text/javascript">
   $(document).ready(function(){

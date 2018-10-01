@@ -6,7 +6,6 @@ import datetime
 # Create your views here.
 def weather_list(request):
     url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=356b2fdb14fc40881b782e048064275f'
-    kota = 'Banjarmasin'
 
     kota = Kota.objects.all()
 
@@ -22,7 +21,7 @@ def weather_list(request):
         }
         data_cuaca.append(kota_cuaca)
 
-    return render(request, 'weather_app/weather_list.html', {'data_cuaca':data_cuaca})
+    return render(request, 'weather_app/weather_list.html', {'data_cuaca':data_cuaca, 'datetime':datetime.datetime.now()})
 
 
 
