@@ -43,16 +43,11 @@ def artikel_tambah(request):
     return render(request, 'artikel_app/artikel_tambah.html', {'form':form})
 
 
-def handle_uploaded_file(f):
-    with open('some/file/name.txt', 'wb+') as destination:
-        for chunk in f.chunks():
-            destination.write(chunk)
-
-
 def artikel_edit(request, id_artikel):
     artikel = get_object_or_404(Artikel, pk=id_artikel)
     if request.method == "POST":
-        form = ArtikelEditForm(request.POST, instance=artikel)
+        artikel.foto_sampul.delete()  # hapus fisik foto
+        form = ArtikelEditForm(request.POST, request.FILES, instance=artikel)
         if form.is_valid():
             edit = form.save(commit=False)
             edit.edit_date = datetime.datetime.now()
@@ -73,6 +68,7 @@ def artikel_detail(request, id_artikel):
 
 def artikel_delete(request, id_artikel):
     artikel = get_object_or_404(Artikel, pk=id_artikel)
+    artikel.foto_sampul.delete()  # hapus fisik foto
     artikel.delete()
     messages.success(request, 'berhasil menghapus Artikel !', extra_tags='alert alert-success alert-dismissible fade show')
     return redirect('artikel_list')
