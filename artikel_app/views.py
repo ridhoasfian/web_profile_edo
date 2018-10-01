@@ -46,7 +46,9 @@ def artikel_tambah(request):
 def artikel_edit(request, id_artikel):
     artikel = get_object_or_404(Artikel, pk=id_artikel)
     if request.method == "POST":
-        artikel.foto_sampul.delete()  # hapus fisik foto
+        check_foto_sampul =  request.FILES.get('foto_sampul', False) #check apakah field gambar ada isi nya?
+        if check_foto_sampul : #jika ada hapus gambar
+            artikel.foto_sampul.delete()  # hapus fisik foto
         form = ArtikelEditForm(request.POST, request.FILES, instance=artikel)
         if form.is_valid():
             edit = form.save(commit=False)
