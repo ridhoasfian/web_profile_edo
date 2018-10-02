@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from .models import *
 from .forms import TambahAnggaranForm, SubmitBiayaForm
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 def anggaran_list(request):
@@ -8,6 +9,16 @@ def anggaran_list(request):
     anggaran_kosong=False
     if len(anggaran_list) == 0:
         anggaran_kosong=True
+
+    #paginator
+    paginator = Paginator(anggaran_list, 5) # batasi 5 data perhalaman
+    page = request.GET.get('page')  # ambil nilai param url 'page'
+    anggaran_list = paginator.get_page(page) # ambil data dari halaman
+
+    #menggabung param url
+    ambil_url = request.GET.copy() # ambil semua param url key dan val
+    param_url = ambil_url.pop('page', True) and ambil_url.urlencode()
+
     return render(request, 'budget_app/anggaran_list.html', {'anggaran_list':anggaran_list, 'anggaran_kosong':anggaran_kosong})
 
 def anggaran_detail(request, id_anggaran):

@@ -43,7 +43,7 @@
               </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
+              <a class="nav-link" href="{% url 'about' %}">About</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/contactme_app/">Contact Me</a>
@@ -61,8 +61,8 @@
     {% block content %}
     {% endblock %}
 
-    <footer class="footer">
-      <div class="container">
+    <footer class="footer" >
+      <div class="container" style="height:10px">
         <span class="text-muted">&copy; This web created by ridhoasfian86@gmail.com</span>
       </div>
     </footer>

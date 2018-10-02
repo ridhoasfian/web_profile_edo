@@ -15,6 +15,9 @@ def artikel_list(request):
         object_kategori = get_object_or_404(Kategori, nama=ambil_param_url)
         artikel = object_kategori.artikel_set.all()
 
+    if 'search' in request.GET:
+        artikel = artikel.filter(judul__icontains=request.GET['search'])    
+
     #paginator
     paginator = Paginator(artikel, 5) # batasi 5 data perhalaman
     page = request.GET.get('page')  # ambil nilai param url 'page'

@@ -16,7 +16,7 @@
 
           <div class="blog-post">
             <h2 class="blog-post-title">{{artikel.judul}}</h2>
-            <p class="blog-post-meta">{{artikel.edit_date}} || Sumber : <a target="{% if artikel.sumber_url is  not None %} _blank {% endif %}" href="{% if artikel.sumber_url is None %} # {% else %} {{artikel.sumber_url}} {% endif %}">{{artikel.sumber}}</a></p>
+            <p class="blog-post-meta">{{artikel.edit_date}} || Sumber : <a target="{% if artikel.sumber is  not None %} _blank {% endif %}" href="{% if artikel.sumber is None %} # {% else %} {{artikel.sumber}} {% endif %}">{{artikel.created_by}}</a></p>
             {{artikel.isi | safe}}
           </div><!-- /.blog-post -->
         </div><!-- /.blog-main -->

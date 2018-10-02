@@ -7,5 +7,8 @@ def home(request):
 def my_project(request):
     return render(request, 'my_project.html', {})
 
+def about(request):
+    return render(request, 'about.html', {})
+
 def test(request):
     return render(request, 'test.html', {})

@@ -6,9 +6,9 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container">
+<div style="background:url('../static/img/background.png')" >
+    <div class="container" >
       <div class="py-5 text-center">
-        <img class="d-block mx-auto mb-4" src="../../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
         <h2>Contact Me</h2>
         <p class="lead">Saya adalah seorang web dev dan programmer desktop. jika ada tawaran project, bisnis, dan tawaran kerja sama untuk membuat project silahkan hubungi saya </p>
       </div>
@@ -108,12 +108,13 @@
               {{form.pesan}}
             </div>
 
-            <hr class="mb-4">
-            <button class="btn btn-primary btn-lg btn-block" type="submit">Kirim Pesan Ke Ridho Asfian</button>
+            <hr class="mb-2">
+            <button class="btn btn-warning btn-lg btn-block" type="submit">Kirim Pesan Ke Ridho Asfian</button> <br><br>
           </form>
         </div>
       </div>
     </div>
+</div>
 
 <script>
   $(document).ready(function(){

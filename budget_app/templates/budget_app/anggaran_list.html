@@ -25,9 +25,29 @@
             <a href="{% url 'anggaran_detail' anggaran.id %}" >{{anggaran.nama}}<a href="{% url 'anggaran_hapus' anggaran.id %}" class="float-right"><i class="fas fa-times-circle"></i></a></a>
           </div>
           {% endfor %}
+
+          <div class="pagination">
+            <span class="step-links">
+              {% if anggaran_list.has_previous %}
+              <a href="?page=1&{{param_url}}">&laquo; first</a>
+              <a href="?page={{ anggaran_list.previous_page_number }}&{{param_url}}">previous</a>
+              {% endif %}
+
+              <span class="current">
+                Page {{ anggaran_list.number }} of {{ anggaran_list.paginator.num_pages }}.
+              </span>
+
+              {% if anggaran_list.has_next %}
+              <a href="?page={{ anggaran_list.next_page_number }}&{{param_url}}">next</a>
+              <a href="?page={{ anggaran_list.paginator.num_pages }}&{{param_url}}">last &raquo;</a>
+              {% endif %}
+            </span>
+          </div>
+
         </div>
       </div>
     </div>
   {% endif %}
 </div>
+
 {% endblock %}
